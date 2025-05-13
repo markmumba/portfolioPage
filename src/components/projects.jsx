@@ -19,8 +19,8 @@ const ProjectsSection = () => {
       role: "Full Stack Developer",
       description:
         "A smart waste management platform optimizing collection scheduling and enabling real-time tracking for service providers. Features payment gateway integration and an automated notification system.",
-      image: "/src/assets/bollaapp.png", // Placeholder - replace with actual image
-      demoLink: "https://bolloapp.netlify.app/", // Replace with actual links
+      image: "/src/assets/bollaapp.png",
+      demoLink: "https://bolloapp.netlify.app/",
       codeLink: "https://github.com/markmumba",
       technologies: [
         "Next.js",
@@ -43,8 +43,8 @@ const ProjectsSection = () => {
       role: "Full Stack Developer",
       description:
         "A comprehensive equipment rental platform serving active users with 500+ equipment listings. Features secure authentication, payment processing, and intuitive interfaces.",
-      image: "/src/assets/rentitup.png", // Placeholder - replace with actual image
-      demoLink: "https://rentitup-frontend.vercel.app/", // Replace with actual links
+      image: "/src/assets/rentitup.png",
+      demoLink: "https://rentitup-frontend.vercel.app/",
       codeLink: "https://github.com/markmumba",
       technologies: ["Next.js", "Spring Boot", "JWT", "OAuth", "TypeScript"],
       highlights: [
@@ -62,8 +62,8 @@ const ProjectsSection = () => {
       role: "Software Developer",
       description:
         "A dynamic website with content management capabilities, allowing non-technical staff to update product catalogs and content without developer involvement.",
-      image: "/src/assets/oskaloosa.png", // Placeholder - replace with actual image
-      demoLink: "https://www.skaloosa.com/", // Replace with actual links
+      image: "/src/assets/oskaloosa.png",
+      demoLink: "https://www.skaloosa.com/",
       codeLink: "https://github.com/markmumba",
       technologies: ["Next.js", "Contentful CMS", "NodeJS"],
       highlights: [
@@ -80,8 +80,8 @@ const ProjectsSection = () => {
       role: "Full Stack Developer",
       description:
         "An end-to-end MVP platform facilitating efficient student-lecturer project supervision with document management and role-based access control.",
-      image: "/src/assets/projecttracker.png", // Placeholder - replace with actual image
-      demoLink: "https://project-tracker-frontend-snowy.vercel.app/", // Replace with actual links
+      image: "/src/assets/projecttracker.png",
+      demoLink: "https://project-tracker-frontend-snowy.vercel.app/",
       codeLink: "https://github.com/markmumba",
       technologies: ["React Vite", "Golang", "JWT Authentication"],
       highlights: [
@@ -148,6 +148,24 @@ const ProjectsSection = () => {
                 src={projects[activeProject].image}
                 alt={projects[activeProject].title}
                 className="w-full h-full object-cover"
+                onError={(e) => {
+                  e.target.style.display = "none";
+                  e.target.parentElement.classList.add(
+                    "flex",
+                    "items-center",
+                    "justify-center"
+                  );
+                  const fallbackIcon = document.createElement("div");
+                  fallbackIcon.className =
+                    "flex flex-col items-center justify-center text-gray-400";
+                  fallbackIcon.innerHTML = `
+                    <svg class="w-16 h-16 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                    <span class="text-sm">Project Preview</span>
+                  `;
+                  e.target.parentElement.appendChild(fallbackIcon);
+                }}
               />
             </div>
 
