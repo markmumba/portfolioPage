@@ -8,6 +8,12 @@ import {
   ArrowRight,
 } from "lucide-react";
 
+// Import project images
+import bollaappImage from "../assets/bollaapp.png";
+import rentitupImage from "../assets/rentitup.png";
+import oskaloosaImage from "../assets/oskaloosa.png";
+import projecttrackerImage from "../assets/projecttracker.png";
+
 const ProjectsSection = () => {
   const [activeProject, setActiveProject] = useState(0);
 
@@ -19,7 +25,8 @@ const ProjectsSection = () => {
       role: "Full Stack Developer",
       description:
         "A smart waste management platform optimizing collection scheduling and enabling real-time tracking for service providers. Features payment gateway integration and an automated notification system.",
-      image: "/src/assets/bollaapp.png",
+      image: bollaappImage,
+      icon: <Layout size={24} className="text-emerald-400" />,
       demoLink: "https://bolloapp.netlify.app/",
       codeLink: "https://github.com/markmumba",
       technologies: [
@@ -43,7 +50,8 @@ const ProjectsSection = () => {
       role: "Full Stack Developer",
       description:
         "A comprehensive equipment rental platform serving active users with 500+ equipment listings. Features secure authentication, payment processing, and intuitive interfaces.",
-      image: "/src/assets/rentitup.png",
+      image: rentitupImage,
+      icon: <Database size={24} className="text-emerald-400" />,
       demoLink: "https://rentitup-frontend.vercel.app/",
       codeLink: "https://github.com/markmumba",
       technologies: ["Next.js", "Spring Boot", "JWT", "OAuth", "TypeScript"],
@@ -62,7 +70,8 @@ const ProjectsSection = () => {
       role: "Software Developer",
       description:
         "A dynamic website with content management capabilities, allowing non-technical staff to update product catalogs and content without developer involvement.",
-      image: "/src/assets/oskaloosa.png",
+      image: oskaloosaImage,
+      icon: <Server size={24} className="text-emerald-400" />,
       demoLink: "https://www.skaloosa.com/",
       codeLink: "https://github.com/markmumba",
       technologies: ["Next.js", "Contentful CMS", "NodeJS"],
@@ -80,7 +89,8 @@ const ProjectsSection = () => {
       role: "Full Stack Developer",
       description:
         "An end-to-end MVP platform facilitating efficient student-lecturer project supervision with document management and role-based access control.",
-      image: "/src/assets/projecttracker.png",
+      image: projecttrackerImage,
+      icon: <Code size={24} className="text-emerald-400" />,
       demoLink: "https://project-tracker-frontend-snowy.vercel.app/",
       codeLink: "https://github.com/markmumba",
       technologies: ["React Vite", "Golang", "JWT Authentication"],
@@ -143,34 +153,36 @@ const ProjectsSection = () => {
         <div className="grid md:grid-cols-5 gap-8">
           {/* Project Image - Takes 2 columns on md+ screens */}
           <div className="md:col-span-2 rounded-md overflow-hidden relative group">
-            <div className="aspect-w-16 aspect-h-9 bg-gray-900 border border-gray-800 rounded-md flex items-center justify-center">
-              <img
-                src={projects[activeProject].image}
-                alt={projects[activeProject].title}
-                className="w-full h-full object-cover"
-                onError={(e) => {
-                  e.target.style.display = "none";
-                  e.target.parentElement.classList.add(
-                    "flex",
-                    "items-center",
-                    "justify-center"
-                  );
-                  const fallbackIcon = document.createElement("div");
-                  fallbackIcon.className =
-                    "flex flex-col items-center justify-center text-gray-400";
-                  fallbackIcon.innerHTML = `
-                    <svg class="w-16 h-16 mb-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                    <span class="text-sm">Project Preview</span>
-                  `;
-                  e.target.parentElement.appendChild(fallbackIcon);
-                }}
-              />
+            <div className="aspect-w-16 aspect-h-9 bg-gray-900 border border-gray-800 rounded-md overflow-hidden">
+              {/* Image with fallback */}
+              <div className="w-full h-full relative">
+                {/* Fallback content */}
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-900">
+                  <div className="text-center p-8">
+                    <div className="w-16 h-16 mx-auto mb-4 rounded-md bg-black border border-gray-800 flex items-center justify-center">
+                      {projects[activeProject].icon}
+                    </div>
+                    <h4 className="text-emerald-400 text-lg font-medium">
+                      {projects[activeProject].subtitle}
+                    </h4>
+                  </div>
+                </div>
+
+                {/* Image that will overlay the fallback if it loads */}
+                <img
+                  src={projects[activeProject].image}
+                  alt={projects[activeProject].title}
+                  className="absolute inset-0 w-full h-full object-cover object-center z-20 opacity-80 hover:opacity-100 transition-opacity"
+                  onError={(e) => {
+                    // Hide the image if it fails to load
+                    e.target.style.display = "none";
+                  }}
+                />
+              </div>
             </div>
 
             {/* Overlay with links */}
-            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-opacity duration-300">
+            <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 flex items-center justify-center gap-4 transition-opacity duration-300 z-30">
               <a
                 href={projects[activeProject].demoLink}
                 target="_blank"
