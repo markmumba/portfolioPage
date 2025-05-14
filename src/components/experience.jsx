@@ -104,10 +104,31 @@ const ExperienceSection = () => {
                   Data Structures
                 </span>
                 <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
+                  Calculus
+                </span>
+                <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
+                  Digital Logic
+                </span>
+                <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
+                  Computer Organization
+                </span>
+                <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
+                  Compiler Construction
+                </span>
+                <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
                   Algorithms
                 </span>
                 <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
-                  System Design
+                  Microcontrollers
+                </span>
+                <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
+                  Operating Systems
+                </span>
+                <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
+                  Computer Networks
+                </span>
+                <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
+                  Computer Architecture
                 </span>
               </div>
             </TimelineItem>
@@ -125,14 +146,18 @@ const ExperienceSection = () => {
                 web technologies and best practices in software development.
               </p>
               <div className="flex flex-wrap gap-2 mt-3">
+
                 <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
                   JavaScript
                 </span>
                 <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
-                  React
+                  Angular
                 </span>
                 <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
-                  Ruby on Rails
+                  Python
+                </span>
+                <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
+                  Django
                 </span>
               </div>
             </TimelineItem>

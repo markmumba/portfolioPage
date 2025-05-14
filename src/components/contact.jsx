@@ -1,7 +1,52 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import { Mail, Phone, Send } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const ContactSection = () => {
+  const formRef = useRef();
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess(false);
+
+    try {
+      const result = await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      );
+
+      setSuccess(true);
+      setForm({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    } catch (error) {
+      setError("Failed to send message. Please try again.");
+      console.error("Error sending email:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -119,9 +164,6 @@ const ContactSection = () => {
                 </div>
               </div>
             </div>
-
-            {/* Testimonial Card */}
-   
           </div>
 
           {/* Contact Form - 3 columns on md+ screens */}
@@ -129,7 +171,7 @@ const ContactSection = () => {
             <div className="bg-black border border-gray-800 p-6 rounded-md shadow-xl">
               <h3 className="text-xl font-bold mb-6">Send Me a Message</h3>
 
-              <form className="space-y-6">
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label
@@ -141,6 +183,9 @@ const ContactSection = () => {
                     <input
                       type="text"
                       id="name"
+                      name="name"
+                      value={form.name}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-md focus:outline-none focus:border-emerald-500 transition-colors"
                       placeholder="Your name"
                       required
@@ -156,6 +201,9 @@ const ContactSection = () => {
                     <input
                       type="email"
                       id="email"
+                      name="email"
+                      value={form.email}
+                      onChange={handleChange}
                       className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-md focus:outline-none focus:border-emerald-500 transition-colors"
                       placeholder="Your email"
                       required
@@ -173,6 +221,9 @@ const ContactSection = () => {
                   <input
                     type="text"
                     id="subject"
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
                     className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-md focus:outline-none focus:border-emerald-500 transition-colors"
                     placeholder="Subject"
                     required
@@ -188,6 +239,9 @@ const ContactSection = () => {
                   </label>
                   <textarea
                     id="message"
+                    name="message"
+                    value={form.message}
+                    onChange={handleChange}
                     rows={6}
                     className="w-full px-4 py-3 bg-gray-900 border border-gray-800 rounded-md focus:outline-none focus:border-emerald-500 transition-colors resize-none"
                     placeholder="Your message"
@@ -195,15 +249,28 @@ const ContactSection = () => {
                   ></textarea>
                 </div>
 
+                {error && <div className="text-red-500 text-sm">{error}</div>}
+
+                {success && (
+                  <div className="text-emerald-500 text-sm">
+                    Message sent successfully! I'll get back to you soon.
+                  </div>
+                )}
+
                 <div>
                   <button
                     type="submit"
-                    className="w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-black font-medium rounded-md transition-colors flex items-center justify-center gap-2 group"
+                    disabled={loading}
+                    className={`w-full py-4 bg-emerald-500 hover:bg-emerald-600 text-black font-medium rounded-md transition-colors flex items-center justify-center gap-2 group ${
+                      loading ? "opacity-70 cursor-not-allowed" : ""
+                    }`}
                   >
-                    Send Message
+                    {loading ? "Sending..." : "Send Message"}
                     <Send
                       size={18}
-                      className="transform group-hover:translate-x-1 transition-transform"
+                      className={`transform group-hover:translate-x-1 transition-transform ${
+                        loading ? "animate-pulse" : ""
+                      }`}
                     />
                   </button>
                 </div>
