@@ -7,6 +7,7 @@ import {
   Layout,
   ArrowRight,
 } from "lucide-react";
+import PolkaDotBackground from "./PolkaDotBackground";
 
 // Import project images
 import bollaappImage from "../assets/bollaapp.png";
@@ -109,6 +110,7 @@ const ProjectsSection = () => {
       id="projects"
       className="py-24 bg-[#070F10] text-white relative overflow-hidden"
     >
+      <PolkaDotBackground />
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-64 h-64 bg-emerald-900 rounded-full blur-3xl opacity-20"></div>

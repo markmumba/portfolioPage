@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Mail, Phone, Send } from "lucide-react";
 import emailjs from "@emailjs/browser";
+import PolkaDotBackground from "./PolkaDotBackground";
 
 const ContactSection = () => {
   const formRef = useRef();
@@ -32,16 +33,26 @@ const ContactSection = () => {
         import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
 
-      setSuccess(true);
-      setForm({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
+      if (result.status === 200) {
+        setSuccess(true);
+        setForm({
+          name: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        throw new Error(result.text);
+      }
     } catch (error) {
-      setError("Failed to send message. Please try again.");
       console.error("Error sending email:", error);
+      if (error.text?.includes("insufficient authentication scopes")) {
+        setError(
+          "Email service configuration error. Please contact the website administrator."
+        );
+      } else {
+        setError("Failed to send message. Please try again.");
+      }
     } finally {
       setLoading(false);
     }
@@ -52,6 +63,7 @@ const ContactSection = () => {
       id="contact"
       className="py-24 bg-[#070F10] text-white relative overflow-hidden"
     >
+      <PolkaDotBackground />
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 right-10 w-64 h-64 bg-emerald-900 rounded-full blur-3xl opacity-20"></div>

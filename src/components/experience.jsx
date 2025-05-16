@@ -7,6 +7,7 @@ import {
   Download,
 } from "lucide-react";
 import resumePDF from "../assets/resume.pdf";
+import PolkaDotBackground from "./PolkaDotBackground";
 
 const ExperienceSection = () => {
   return (
@@ -14,6 +15,7 @@ const ExperienceSection = () => {
       id="experience"
       className="py-16 md:py-24 bg-[#070F10] text-white relative overflow-hidden"
     >
+      <PolkaDotBackground />
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 right-10 w-64 h-64 bg-emerald-900 rounded-full blur-3xl opacity-20"></div>
@@ -146,7 +148,6 @@ const ExperienceSection = () => {
                 web technologies and best practices in software development.
               </p>
               <div className="flex flex-wrap gap-2 mt-3">
-
                 <span className="px-2 py-1 md:px-3 md:py-1 bg-black border border-gray-800 rounded-full text-xs text-gray-300">
                   JavaScript
                 </span>

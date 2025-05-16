@@ -7,6 +7,10 @@ const HeroSection = () => {
       id="home"
       className="min-h-screen flex items-center relative overflow-hidden bg-[#070F10] text-white"
     >
+         <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-[radial-gradient(#ffffff_1px,transparent_1px)] [background-size:16px_16px] opacity-30"></div>
+         </div>
+
       {/* Background Elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-20 left-10 w-64 h-64 bg-emerald-900 rounded-full blur-3xl opacity-20"></div>
